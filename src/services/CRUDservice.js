@@ -11,12 +11,12 @@ let createNewUser = async (data) => {
             let hashPasswordFromBcrypt = await hashUserPassword(data.password);
             await db.User.create({
                 email: data.email,
-                password:hashPasswordFromBcrypt,
-                firstName:  data.firstName,
-                lastName:  data.lastName,
-                address:  data.address,
-                phonenumber:  data.phonenumber,
-                gender:  data.gender === '1' ? true : false,
+                password: hashPasswordFromBcrypt,
+                firstName: data.firstName,
+                lastName: data.lastName,
+                address: data.address,
+                phonenumber: data.phonenumber,
+                gender: data.gender === '1' ? true : false,
                 roleId: data.roleId,
             })
 
@@ -42,6 +42,20 @@ let hashUserPassword = (password) => {
     })
 }
 
+let getAllUser = () => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let users = db.User.findAll({
+                raw: true,
+            });
+            resolve(users)
+        } catch (e) {
+            reject(e)
+        }
+    })
+}
+
 module.exports = {
-    createNewUser: createNewUser
+    createNewUser: createNewUser,
+    getAllUser: getAllUser,
 }
