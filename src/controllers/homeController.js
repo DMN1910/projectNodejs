@@ -32,7 +32,9 @@ let displayGetCRUD = async (req, res) => {
     console.log('--------------------------')
     console.log(data)
     console.log('--------------------------')
-    return res.render('displayCRUD.ejs')
+    return res.render('displayCRUD.ejs', {
+        dataTable: data
+    })
 }
 
 module.exports = {
